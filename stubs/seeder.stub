@@ -1,0 +1,23 @@
+<?php
+
+use App\Component\Extensions\SeederExtension;
+use Illuminate\Database\Seeder;
+use App\DummyModel;
+
+class DummyClass extends Seeder
+{
+    use SeederExtension;
+
+    public $model = 'App\DummyModel';
+    public $production = false;
+
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //
+    }
+}

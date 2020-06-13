@@ -1,0 +1,17 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Component\Extensions\ModelExtension;
+use Illuminate\Database\Eloquent\Model;
+
+class DummyClass extends Model
+{
+    use ModelExtension;
+
+    protected $fillable = [
+        
+    ];
+
+    //
+}
