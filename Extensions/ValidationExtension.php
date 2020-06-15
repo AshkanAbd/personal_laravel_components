@@ -33,7 +33,7 @@ trait ValidationExtension
                 $callerClass = substr(str_replace($this->namespace, '', $callerClass), 1);
                 if ($pos = strpos($callerClass, '\\')) {
                     $prefix = substr($callerClass, 0, $pos);
-                    $callerClass = $prefix . substr($callerClass, $pos + 1);
+                    $callerClass = substr($callerClass, $pos + 1);
                 }
             }
         } else if ($controllerMethod === '') {
@@ -43,7 +43,7 @@ trait ValidationExtension
             $callerClass = substr(str_replace($this->namespace, '', $caller['class']), 1);
             if ($pos = strpos($callerClass, '\\')) {
                 $prefix = substr($callerClass, 0, $pos);
-                $callerClass = $prefix . substr($callerClass, $pos + 1);
+                $callerClass = substr($callerClass, $pos + 1);
             }
         }
         return [$callerClass, $callerFunction, $prefix];
