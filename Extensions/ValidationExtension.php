@@ -15,6 +15,11 @@ trait ValidationExtension
     private $namespace = 'App\Http\Controllers';
 
     /**
+     * @var array array to inject in functions
+     */
+    private $values = [];
+
+    /**
      * Load class and function of Target controller
      *
      * @param string $controllerMethod
@@ -53,11 +58,13 @@ trait ValidationExtension
      * Validate incoming request
      *
      * @param string $controllerMethod
+     * @param array $values
      * @return Validation
      * @throws ValidationException
      */
-    protected function validate($controllerMethod = '')
+    protected function validate($controllerMethod = '', ...$values)
     {
+        $this->values = $values;
         $validation = Validator::make(request()->all(), $this->getRule($controllerMethod),
             $this->getMessage($controllerMethod), $this->getAttribute($controllerMethod));
         if ($validation->fails()) {
@@ -187,7 +194,7 @@ trait ValidationExtension
                 }
             }
             if (method_exists($baseClass, $class)) {
-                $controllerRule = forward_static_call([$baseClass, $class], request());
+                $controllerRule = forward_static_call([$baseClass, $class], request(), $this->values);
                 if (key_exists($method, $controllerRule)) {
                     return $controllerRule[$method];
                 }
